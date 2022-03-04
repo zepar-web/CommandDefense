@@ -51,11 +51,25 @@ void ParseSources()
 // Week 1 - using C API
 void ReadTopScore()
 {
-    // open file "UserScores.txt"
+    FILE* f = fopen(UserScors.txt, "r");
 
-    // read line by line: Name Points
+    if (f == nullptr)
+    {
+        printf("Eroare deschidere");
+        return 0;
+    }
+    int scor = 0, scorSalvat = 0;
+    char nume[200] = "", numeSalvat[200] = "";
 
-    // print the name with biggest points
+    while (fscanf(f, "%s %d", nume, % scor) != EOF)
+    {
+        if (scor > scorSalvat)
+        {
+            scorSalvat = scor;
+            strcpy(numeSalvat, nume);
+        }
+    }
+    printf("Utilizatorul %s are scorul: %d", numeSalvat, scorSalvat);
 
-    // close file
+    fclose(f);
 }
